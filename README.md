@@ -3,6 +3,9 @@ Banner-Calendar-Server
 
 Service that serves iCal files for registered users, of their Student Calendars.
 
+## Using `Banner Calendar`
+Go to [http://society.cs.smu.ca:1234/](http://society.cs.smu.ca:1234/) and sign up with your SMU Self-Service Banner credentials. See [security below](#security) if you have any concerns.
+
 ## How It Works
 
 Powered by [Self Service Banner API for Node.js](https://github.com/SMU-CS-and-Math-Society/Self-Service).
