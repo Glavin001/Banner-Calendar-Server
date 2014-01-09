@@ -1,0 +1,28 @@
+{
+  "name": "Banner-Calendar-Server",
+  "version": "0.1.0",
+  "description": "Service that serves iCal files for registered users, of their Student Calendars.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SMU-CS-and-Math-Society/Banner-Calendar-Server.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SMU-CS-and-Math-Society/Banner-Calendar-Server/issues"
+  },
+  "homepage": "https://github.com/SMU-CS-and-Math-Society/Banner-Calendar-Server",
+  "private": true,
+  "dependencies": {
+    "self-service-banner": "0.1.0",
+    "icalendar": "0.6.5",
+    "express": "3.4.7"
+  },
+  "devDependencies": {
+    "mocha": "1.16.2"
+  }
+}
