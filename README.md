@@ -6,11 +6,11 @@ Service that serves iCal files for registered users, of their Student Calendars.
 ## Trying `Banner Calendar`
 Go to [http://society.cs.smu.ca:1234/](http://society.cs.smu.ca:1234/) and sign up with your SMU Self-Service Banner credentials. See [security below](#security) if you have any concerns.
 
-### Updating Calendar
-We do not store your login data, and so cannot login again to update. Whenever you change your course schedule, simply login once again and your schedule will be updated. Be sure to *refresh* on your Calendar clients.
-
-### Important
+### `Important`
 We will be upgrading this soon to be even more secure (see [security](#secutiry) below). When that happens, the service will be cleared and restarted. Please come back here and login once again and continue using.
+
+### Updating Your Calendar
+We do not store your login data, and so cannot login again to update. Whenever you change your course schedule, simply login once again and your schedule will be updated. Be sure to *refresh* on your Calendar clients.
 
 ## How It Works
 
