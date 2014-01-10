@@ -197,7 +197,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
     });
 
     // Start server
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.PORT || nconf.get('port'));
 
 });
 

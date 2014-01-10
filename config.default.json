@@ -1,3 +1,4 @@
 {
-    "secret": "default"
+    "secret": "default",
+    "port": 1234
 }
