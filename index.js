@@ -168,7 +168,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
     });
 
     // Stats
-    app.get('/stats.json', function(req, res) {
+    app.get('/api/stats.json', function(req, res) {
         // Count
         collection.count(function(err, count) {
             res.json({ 'calendars': count }, 200);

@@ -1,5 +1,17 @@
 $(document).ready(function() {
 
+    // Request Stats
+    $.ajax({
+        method: "GET",
+        url: '/api/stats.json',
+        success: function(data, textStatus, jqXHR)
+        {
+            console.log(data);
+            $('.cal-count').text(data.calendars);
+        }
+    });
+
+
     var sections = {
         'main': 1,
         'sign-in': 2,
