@@ -1,19 +1,25 @@
 .section {
     border-bottom: 1px solid #e3e3e3;
     text-align: center;
+    //height: !important 100%;
+    margin: 0px;
+    padding: 0px;
 }
 
 .section.active {
-        
+
 }
 
 .section > form, 
 .section > div {
     position: relative;
-    top: 5%;
+    top: 0%;
     margin: 0 auto 0;
 }
 
+.section#main-section > div {
+    top: 30%;
+}
 .section#loading-section > div {
     top: 40%;
 }

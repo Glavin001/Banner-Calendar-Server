@@ -14,12 +14,17 @@ $(document).ready(function() {
     });
 
     var sections = {
-        'sign-in': 1,
-        'loading': 2,
-        'finish': 3,
-        'help': 4
+        'main': 1,
+        'sign-in': 2,
+        'loading': 3,
+        'finish': 4,
+        'help': 5
     };
 
+    //$(".main").moveTo(sections['help']);
+    //$(".main").moveTo(sections['main']);
+
+    /*
     // Make Textarea read-only, source: http://stackoverflow.com/a/15518726/2578205
     $('textarea[readonly]').removeAttr('readonly').each(function () {
                 var $this = $(this);
@@ -28,6 +33,7 @@ $(document).ready(function() {
                 var $this = $(this);
                 $('[data-textarea="'+$this.attr('id')+'"]').html($this.val());
             });
+    */
 
     /*
     function smoothScrollTo(hash) {
@@ -126,7 +132,7 @@ $(document).ready(function() {
      });
     */
 
-    /*
+    
     function getViewport() {
 
      var viewPortWidth;
@@ -153,18 +159,18 @@ $(document).ready(function() {
      }
      return [viewPortWidth, viewPortHeight];
     }
-    */
+    
 
-    /*
+    
     var resize = function() {
         var viewPort = getViewport();
-        $('section').height(viewPort[1]);
+        $('.onepage-wrapper').height(viewPort[1]);
     };
     resize();
     $(window).resize(function() {
         resize();
     })
-    */
+    
 
 
  });
