@@ -3,8 +3,10 @@ var selfService = require('self-service-banner');
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
 var icalendar = require('icalendar');
+var crypto = require('crypto');
 // 
 var app = express();
+
 
 // 
 var getCourses = function (username, password, callback) {
@@ -16,12 +18,12 @@ var getCourses = function (username, password, callback) {
     });
 };
 
-var saveCoursesForUser = function(username, courses, collection, callback) {
+var saveCoursesForUser = function(calendarId, courses, collection, callback) {
     var data = {
-        calendarId: username,
+        calendarId: calendarId,
         courses: courses
     };
-    collection.update({'calendarId': username}, data, {upsert:true}, function(err, docs) {
+    collection.update({ 'calendarId': calendarId }, data, {upsert:true}, function(err, docs) {
         //console.log(err, docs);
         callback(err, docs);
     });
@@ -127,11 +129,12 @@ MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
         getCourses(username, password, function(courses) {
             console.log("Retrieved Courses");
             console.log(courses);
+            
+            var calendarId = crypto.createHash('md5').update(username).digest('hex');
 
-            saveCoursesForUser(username, courses, collection, function(err, docs) {
+            saveCoursesForUser(calendarId, courses, collection, function(err, docs) {
                 console.log('Saved Courses');
 
-                var calendarId = username;
                 var url = "/calendar/"+calendarId+"/calendar.ics";
                 res.json({
                     'url': url,
@@ -140,6 +143,16 @@ MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
 
             });
 
+        });
+
+    });
+
+    // Stats
+    app.get('/stats.json', function(req, res) {
+        // Count
+        collection.count(function(err, count) {
+            console.log(format("count = %s", count));
+            
         });
 
     });
