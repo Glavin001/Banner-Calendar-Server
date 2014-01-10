@@ -1,29 +1,35 @@
-.section {
+.container-full {
+  margin: 0 auto;
+  width: 100%;
+}
+
+section,
+section.alert {
     border-bottom: 1px solid #e3e3e3;
     text-align: center;
-    //height: !important 100%;
+    height: !important 100%;
     margin: 0px;
     padding: 0px;
 }
 
-.section.active {
+section.active {
 
 }
 
-.section > form, 
-.section > div {
+section > form, 
+section > div {
     position: relative;
     top: 0%;
     margin: 0 auto 0;
 }
 
-.section#main-section > div {
-    top: 30%;
+section#main-section > div {
+    top: 10%;
 }
-.section#loading-section > div {
+section#loading-section > div {
     top: 40%;
 }
-.section#finish-section > form {
+section#finish-section > form {
     top: 20%;
 }
 

@@ -1,18 +1,5 @@
 $(document).ready(function() {
 
-    // One Page Scroll
-    $(".main").onepage_scroll({
-        sectionContainer: "section", // sectionContainer accepts any kind of selector in case you don't want to use section
-        easing: "ease", // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in", "ease-out", "ease-in-out", or even cubic bezier value such as "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
-        animationTime: 1000, // AnimationTime let you define how long each section takes to animate
-        pagination: true, // You can either show or hide the pagination. Toggle true for show, false for hide.
-        updateURL: false, // Toggle this true if you want the URL to be updated automatically when the user scroll to each page.
-        beforeMove: function(index) {}, // This option accepts a callback function. The function will be called before the page moves.
-        afterMove: function(index) {}, // This option accepts a callback function. The function will be called after the page moves.
-        loop: true, // You can have the page loop back to the top/bottom when the user navigates at up/down on the first/last page.
-        responsiveFallback: false // You can fallback to normal page scroll by defining the width of the browser in which you want the responsive fallback to be triggered. For example, set this to 600 and whenever the browser's width is less than 600, the fallback will kick in.
-    });
-
     var sections = {
         'main': 1,
         'sign-in': 2,
@@ -20,9 +7,6 @@ $(document).ready(function() {
         'finish': 4,
         'help': 5
     };
-
-    //$(".main").moveTo(sections['help']);
-    //$(".main").moveTo(sections['main']);
 
     /*
     // Make Textarea read-only, source: http://stackoverflow.com/a/15518726/2578205
@@ -35,7 +19,6 @@ $(document).ready(function() {
             });
     */
 
-    /*
     function smoothScrollTo(hash) {
         var dest=0;
         if ($(hash).offset().top > $(document).height()-$(window).height()) {
@@ -46,7 +29,10 @@ $(document).ready(function() {
         //go to destination
         $('html,body').animate({scrollTop:dest}, 1000,'swing');
     }
-    */
+
+    $('.getting-started-btn').click(function() {
+        smoothScrollTo('#sign-in-section');
+    })
 
     //
     var $formSignIn = $('#form-signin');
@@ -62,8 +48,7 @@ $(document).ready(function() {
       $('input[name="password"]', $formSignIn).val('');
       
         // Scroll down
-      //smoothScrollTo('#loading-section');
-      $(".main").moveTo(sections['loading']);
+      smoothScrollTo('#loading-section');
 
         // Send request
       $.ajax({
@@ -93,15 +78,13 @@ $(document).ready(function() {
             $('a#calendarURL').text(calendarURL).attr('href', calendarURL);
 
             // Scroll back up to login
-            //smoothScrollTo("#finish-section");
-            $(".main").moveTo(sections['finish']);
+            smoothScrollTo("#finish-section");
 
           } else {
             // Error
 
             // Scroll back up to login
-            //smoothScrollTo("#sign-in-section");
-            $(".main").moveTo(sections['sign-in']);
+            smoothScrollTo("#sign-in-section");
             
             $formSignIn.addClass('error-occured');
 
@@ -112,8 +95,7 @@ $(document).ready(function() {
             console.error("An error occured: ", textStatus);
 
             // Scroll back up to login
-            //smoothScrollTo("#sign-in-section");
-            $(".main").moveTo(sections['sign-in']);
+            smoothScrollTo("#sign-in-section");
 
             $formSignIn.addClass('error-occured');
             
@@ -160,17 +142,14 @@ $(document).ready(function() {
      return [viewPortWidth, viewPortHeight];
     }
     
-
-    
     var resize = function() {
         var viewPort = getViewport();
-        $('.onepage-wrapper').height(viewPort[1]);
+        $('section').height(viewPort[1]);
     };
     resize();
     $(window).resize(function() {
         resize();
     })
     
-
 
  });

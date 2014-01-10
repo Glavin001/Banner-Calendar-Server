@@ -171,8 +171,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
     app.get('/stats.json', function(req, res) {
         // Count
         collection.count(function(err, count) {
-            console.log(format("count = %s", count));
-            
+            res.json({ 'calendars': count }, 200);
         });
 
     });
@@ -189,8 +188,8 @@ MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
             var courses = result.courses;
 
             coursesToCalendar(courses, function(calendar) {
-                //res.header("Content-Type", "text/calendar; charset=utf-8");
-                //res.header("Content-Disposition", "inline; filename=calendar.ics");
+                res.header("Content-Type", "text/calendar; charset=utf-8");
+                res.header("Content-Disposition", "inline; filename=calendar.ics");
                 res.end(calendar.toString());
             });
         });
