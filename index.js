@@ -4,9 +4,18 @@ var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
 var icalendar = require('icalendar');
 var crypto = require('crypto');
+var nconf = require('nconf');
 // 
 var app = express();
 
+// Configuration
+nconf
+    .argv()
+    .env()
+    .file('custom', 'config.json')
+    .file('config.default.json');
+
+console.log( nconf.get('secret') );
 
 // 
 var getCourses = function (username, password, callback) {
