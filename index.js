@@ -15,9 +15,9 @@ nconf
     .file('custom', 'config.json')
     .file('config.default.json');
 
-console.log( nconf.get('secret') );
-
-// 
+/**
+Helper Functions
+*/
 var getCourses = function (username, password, callback) {
     var s = new selfService;
     s.login({'username': username, 'password': password }, function(error, response, localService) {
@@ -26,7 +26,6 @@ var getCourses = function (username, password, callback) {
         });
     });
 };
-
 var saveCoursesForUser = function(calendarId, courses, collection, callback) {
     var data = {
         calendarId: calendarId,
@@ -37,7 +36,6 @@ var saveCoursesForUser = function(calendarId, courses, collection, callback) {
         callback(err, docs);
     });
 };
-
 var timeFromStr = function(str) {
     // Ex: "4:00 pm"
     var hours = 0;
@@ -51,7 +49,6 @@ var timeFromStr = function(str) {
     }
     return {'hours':hours, 'minutes':minutes }
 };
-
 var daysFromDaysArray = function(arr) {
     var days = [ ];
     for (var i=0, len=arr.length; i<len; i++ )
@@ -60,7 +57,6 @@ var daysFromDaysArray = function(arr) {
     }
     return days;
 };
-
 var dayFromDayStr = function(str) {
     console.log(str);
     var day = "";
@@ -80,7 +76,6 @@ var dayFromDayStr = function(str) {
         day = "SU";
     return day;
 };
-
 var jsonToEvent = function(json) {
     console.log(json);
     var vevent = new icalendar.VEvent("event-"+json.crn);
@@ -101,7 +96,6 @@ var jsonToEvent = function(json) {
     vevent.addProperty('RRULE', { FREQ: 'WEEKLY', BYDAY: days.join(',') });
     return vevent;
 };
-
 var coursesToCalendar = function(courses, callback) {
     console.log(courses);
     // Generate iCalendar file
@@ -118,6 +112,9 @@ var coursesToCalendar = function(courses, callback) {
     return callback(calendar);
 };
 
+/**
+Main
+*/
 MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
     if(err) throw err;
     
@@ -129,28 +126,42 @@ MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
     app.use(express.static(__dirname + '/public'));
     app.use("/bower_components", express.static(__dirname + '/bower_components'));
     
-    // API
+    /**
+    =========================================================================
+    API
+    */
     app.post('/api/updateUser', function(req, res) {
-        console.log('/api/updateUser', res.body);
+        //console.log('/api/updateUser', req.body);
         var username = req.body.username;
         var password = req.body.password;
 
         getCourses(username, password, function(courses) {
-            console.log("Retrieved Courses");
-            console.log(courses);
-            
-            var calendarId = crypto.createHash('md5').update(username).digest('hex');
+            //console.log("Retrieved Courses");
+            //console.log(courses);
 
-            saveCoursesForUser(calendarId, courses, collection, function(err, docs) {
-                console.log('Saved Courses');
+            if (courses.length > 0) {
 
-                var url = "/calendar/"+calendarId+"/calendar.ics";
-                res.json({
-                    'url': url,
-                    'courses': courses
+                // Create secure CalendarId
+                var temp = (username + nconf.get('secret'));
+                var digest = "hex"
+                var calendarId = crypto.createHash('md5').update(temp).digest(digest);
+                console.log(calendarId);
+                saveCoursesForUser(calendarId, courses, collection, function(err, docs) {
+                    console.log('Saved Courses');
+
+                    var url = "/calendar/"+calendarId+"/calendar.ics";
+                    res.json({
+                        'url': url,
+                        'courses': courses
+                    }, 201);
+
                 });
 
-            });
+            } else {
+                res.json({
+                    'error': "No courses were found."
+                }, 204);
+            }
 
         });
 

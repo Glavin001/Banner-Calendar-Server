@@ -2,7 +2,10 @@
 <html>
   <head>
     <title>Banner Calendar</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Prevent iPhone Zoom, Source: http://stackoverflow.com/a/11064271/2578205 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
     <!-- Bootstrap -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -13,30 +16,114 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
+    <!-- Main -->
+    <link href="main.css" rel="stylesheet">
+    <!-- Sign In -->
     <link href="signin.css" rel="stylesheet">
+    <!-- One Page Scroll -->
+    <link href="onepage-scroll/onepage-scroll.css" rel="stylesheet">
 
   </head>
   <body>
 
-    <div class="container">
-        <form id="form-signin" class="form-signin" role="form">
-            <h2 class="form-signin-heading">Please sign in</h2>
-            <input type="text" name="username" class="form-control" placeholder="A-number" required="" autofocus="">
-            <input type="password" name="password" class="form-control" placeholder="PIN" required="">
+    <div class="container main">
+
+        <!--
+        <div class="main">
+        -->
+
+            <section id="sign-in-section" class="alert">
+                <form id="form-signin" class="form-signin" role="form">
+                    <h2 class="form-signin-heading">Please Sign In</h2>
+
+                    <div class="alert alert-info">
+                    <i class="glyphicon glyphicon-exclamation-sign"></i> 
+                    We login this once with your A-Number and PIN. 
+                    We do not store this information for future use.
+                    See our <a href="https://github.com/SMU-CS-and-Math-Society/Banner-Calendar-Server#security">Security</a> section for more information.
+                    </div>
+
+                    <input type="text" name="username" class="form-control" placeholder="A-number" required="" autofocus="">
+                    <input type="password" name="password" class="form-control" placeholder="PIN" required="">
+                    <!--
+                    <label class="checkbox">
+                      <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                    -->
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    
+                    <hr/>
+
+                    <div class="signin-error-msg alert alert-danger">
+                    An error occured. 
+                    This may be because you have no signed up for any courses yet.
+                    Or your username and/or password were incorrect.
+                    Please try again.
+                    </div>
+
+                </form>
+
+            </section>
+
             <!--
-            <label class="checkbox">
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
+            <a id="user-calendar-url" class="btn btn-primary" href="" target="_blank"></a>
+
+            <pre class="user-info"> 
+            </pre>
             -->
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
 
-        <hr/>
+            <section id="loading-section" class="alert alert-info">
+                <div class="">
+                    <h2><i class="glyphicon glyphicon-info-sign"></i> Loading...</h2>
+                    <!--
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tr>
+                          <td class="active">...</td>
+                          <td class="success">...</td>
+                          <td class="warning">...</td>
+                          <td class="danger">...</td>
+                        </tr>
+                      </table>
+                    </div>
+                    -->
+                    
+                </div>
+            </section>
 
-        <a id="user-calendar-url" class="btn btn-primary" href="" target="_blank"></a>
+            <section id="finish-section" class="alert alert-success">
+                <form class="form-horizontal" role="form">
+                    <h2><i class="glyphicon glyphicon-ok-sign"></i> Finish</h2>
+                    <div class="form-group">
+                        <label for="calendarURL" class="col-sm-2 control-label">Calendar URL</label>
+                        <div class="col-sm-10">
+                            <!--
+                            <input type="text" class="form-control" id="calendarURL" placeholder="Your Calendar URL">
+                            -->
+                            <!--
+                            <textarea id="calendarURL" readonly="readonly" class="copyable"></textarea>
+                            -->
+                            <a href="#" id="calendarURL">Please sign up above.</a>
 
-        <pre class="user-info"> 
-        </pre>
+                        </div>
+                    </div>
+                    <i class="glyphicon glyphicon-floppy-save"></i>
+                    <p class="lead">Copy the above Calendar URL.</p>
+                </form>
+            </section>
+
+            <section id="help-section" class="alert alert-warning">
+                <div>
+                    <h2>Help</h2>
+                    <p class="lead">For more information please see the 
+                    <a class="btn btn-info btn-" href="https://github.com/SMU-CS-and-Math-Society/Banner-Calendar-Server" target="_blank">GitHub repository</a>.
+                    </p>
+                </div>
+            </section>
+        
+        <!--
+        </div>
+        -->
 
     </div>
 
@@ -44,9 +131,12 @@
     <script src="bower_components/jquery/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- One Page Scroll -->
+    <script src="onepage-scroll/jquery.onepage-scroll.min.js"></script>
 
     <!-- Include Custom Script -->
     <script src="main.js"></script>
+
 
   </body>
 </html>

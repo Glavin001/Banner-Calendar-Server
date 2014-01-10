@@ -1,0 +1,39 @@
+.section {
+    border-bottom: 1px solid #e3e3e3;
+    text-align: center;
+}
+
+.section.active {
+        
+}
+
+.section > form, 
+.section > div {
+    position: relative;
+    top: 5%;
+    margin: 0 auto 0;
+}
+
+.section#loading-section > div {
+    top: 40%;
+}
+.section#finish-section > form {
+    top: 20%;
+}
+
+.form-signin .signin-error-msg {
+    display: none;
+}
+
+.form-signin.error-occured .signin-error-msg {
+    display: block;
+}
+
+// Source: http://stackoverflow.com/a/6394497/2578205
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] { font-size: 16px; }
+
+#calendarURL {
+    background: #eee;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+}
